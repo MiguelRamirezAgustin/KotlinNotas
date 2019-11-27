@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_2"
+    android:orientation="vertical"
+    tools:context=".activities.RegistroActivity">
+
+    <ImageView
+        android:id="@+id/imgMenuRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_keyboard"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:background="@drawable/border"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtRegistro"
+            android:textColor="@color/colorBlanco"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="35dp"
+        android:orientation="vertical"
+        android:layout_marginRight="35dp">
+
+        <EditText
+            android:id="@+id/eTNombreR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txtNombre"/>
+
+        <EditText
+            android:id="@+id/eTApellidoPaternoR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txtApellidoPaterno"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/eTApellidoMaternoR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txtApellidoMaterno"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/eTCorreoR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txtCorreo"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/eTContraseñaR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txt_Contraseña"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/eTContraseñaRepetirR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txt_RecuperarContraseña"
+            android:layout_marginTop="10dp"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtRegistrarme"
+            android:background="@drawable/rectangle_4"
+            android:textColor="@color/colorLetra"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textAllCaps="false"/>
+
+
+    </LinearLayout>
+
+
+   <TextView
+       android:id="@+id/tVSesion"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/txt_IniciarSesion"
+       android:textColor="@color/colorBlanco"
+       android:layout_gravity="center"
+       android:layout_marginTop="30dp"
+       android:gravity="center"/>
+
+
+</LinearLayout>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">CongnitusFirma</string>
+    <string name="txt_RecuperarContraseña">Recuperar Contraseña</string>
+    <string name="txt_Contraseña">Contraseña</string>
+    <string name="txtIngresar">Ingresar</string>
+    <string name="txt_IniciarSesion">Iniciar Sesión</string>
+    <string name="txtRegistro">Registro</string>
+    <string name="txtRegistrarme">Registrarme</string>
+    <string name="txtNombre">Nombre</string>
+    <string name="txtApellidoPaterno">Apellido Paterno</string>
+    <string name="txtApellidoMaterno">Apellido Materno</string>
+    <string name="txtEmail">E-mail</string>
+    <string name="menu_sesion">Cerrar Sesión</string>
+    <string name="txtCorreo">Correo</string>
+
+    <string name="add_hint">Añade una nota</string>
+    <string name="btn_add">Añadir</string>
+    <string name="add_fecha">Fecha</string>
+    <string name="btn_fecha">Fecha</string>
+    <string name="txtNotas">Notas</string>
+    <string name="txtFirma">Firma</string>
+
+
+    //servicos
+    <string name="ws_url_login">http://35.155.161.8:8080/WSExample/DataWS?ApiCall=</string>
+</resources>
