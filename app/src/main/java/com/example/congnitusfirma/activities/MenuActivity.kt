@@ -20,11 +20,10 @@ class MenuActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val LiReportes = findViewById<LinearLayout>(R.id.LisReportes)
+        val LiFirma = findViewById<LinearLayout>(R.id.LiFirma)
         val btnSesion = findViewById<Button>(R.id.btnSesion)
         val nombre = findViewById<TextView>(R.id.tVNombreM)
         val dataParam = intent.getStringExtra("nombre_usr")
-
-        Log.d("TAG", dataParam )
 
 
         //Evento de reportes
@@ -52,6 +51,13 @@ class MenuActivity : AppCompatActivity() {
             }
             val dialog: AlertDialog = builder.create()
             dialog.show()
+        }
+
+
+        //Evento firma
+        LiFirma.setOnClickListener {
+            startActivity(Intent(this, FirmaActivity::class.java))
+            finish()
         }
 
 

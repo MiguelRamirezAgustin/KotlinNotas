@@ -82,7 +82,7 @@
 
 
             <LinearLayout
-                android:id="@+id/Li2"
+                android:id="@+id/LiFirma"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:orientation="vertical"

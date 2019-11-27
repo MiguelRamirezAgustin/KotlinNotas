@@ -44,4 +44,8 @@ dependencies {
     //Retrofit consumo de servico
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+
+    //firma
+    implementation 'com.github.gcacace:signature-pad:1.2.1'
 }

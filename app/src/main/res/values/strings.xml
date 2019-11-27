@@ -19,6 +19,9 @@
     <string name="btn_fecha">Fecha</string>
     <string name="txtNotas">Notas</string>
     <string name="txtFirma">Firma</string>
+    <string name="txtNombreEmpleado">Nombre del empleado</string>
+    <string name="txtFirmaLimpiar">Limpiar firma</string>
+    <string name="txtFirmaGuadar">Guadar firma</string>
 
 
     //servicos
