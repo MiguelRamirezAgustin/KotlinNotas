@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-
         //evento para ir a registro
         tvRegistro.setOnClickListener {
             startActivity(Intent(this@MainActivity, RegistroActivity::class.java))

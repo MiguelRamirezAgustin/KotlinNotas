@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.congnitusfirma.R
 
@@ -23,7 +24,7 @@ class MenuActivity : AppCompatActivity() {
         val LiFirma = findViewById<LinearLayout>(R.id.LiFirma)
         val btnSesion = findViewById<Button>(R.id.btnSesion)
         val nombre = findViewById<TextView>(R.id.tVNombreM)
-        val dataParam = intent.getStringExtra("nombre_usr")
+
 
 
         //Evento de reportes

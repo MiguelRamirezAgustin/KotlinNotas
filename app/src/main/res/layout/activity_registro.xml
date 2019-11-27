@@ -24,9 +24,9 @@
         android:layout_gravity="center">
 
         <ImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:background="@drawable/border"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,6 +34,7 @@
             android:text="@string/txtRegistro"
             android:textColor="@color/colorBlanco"
             android:textSize="25sp"
+            android:layout_gravity="center"
             android:layout_marginTop="15dp"/>
 
     </LinearLayout>
@@ -92,7 +93,7 @@
             android:paddingLeft="9dp"
             android:drawablePadding="6dp"
             android:cursorVisible="true"
-            android:maxLength="15"
+            android:maxLength="25"
             android:singleLine="true"
             android:hint="@string/txtCorreo"
             android:layout_marginTop="10dp"/>
@@ -125,6 +126,7 @@
 
 
         <Button
+            android:id="@+id/btnRegistro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txtRegistrarme"
