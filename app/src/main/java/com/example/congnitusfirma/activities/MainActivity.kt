@@ -50,17 +50,6 @@ class MainActivity : AppCompatActivity() {
                     strUsr = tvUsuario.text.toString()
                     strNip = tvContraseña.text.toString()
                     LoginUser(strUsr , strNip )
-                    /*if(Utils.verifyAvailableNetwork(this)) {
-                        strUsr = tvUsuario.text.toString()
-                        strNip = tvContraseña.text.toString()
-                        LoginUser(strUsr , strNip )
-                    }else{
-                        Toast.makeText(
-                            applicationContext,
-                            "¡No cuenta con conexión a Internet!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }*/
                 }else {
                     Toast.makeText(
                         this,

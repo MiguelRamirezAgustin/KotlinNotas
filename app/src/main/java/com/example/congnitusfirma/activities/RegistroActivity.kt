@@ -94,11 +94,7 @@ class RegistroActivity : AppCompatActivity() {
                                   intent.putExtra("MS", ms)
                                   startActivity(intent)
                               }else{
-                                  Toast.makeText(
-                                      this@RegistroActivity,
-                                      "Intente nuevamnete algo salio mal",
-                                      Toast.LENGTH_SHORT
-                                  ).show()
+                                  showErrorDialog()
                                   email.setText("")
                                   nombre.setText("")
                                   apellidoP.setText("")

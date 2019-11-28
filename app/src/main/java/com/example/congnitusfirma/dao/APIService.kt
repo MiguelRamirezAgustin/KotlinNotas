@@ -1,5 +1,6 @@
 package com.example.congnitusfirma.dao
 
+import com.example.congnitusfirma.model.ResponseContrasenia
 import com.example.congnitusfirma.model.ResponseRegistro
 import com.example.congnitusfirma.model.UsuariosResponse
 import retrofit2.Call
@@ -22,4 +23,8 @@ interface APIService {
         @Query ("apm ") apellidoMR:String,
         @Query ("nip") contraR:String
     ): Call<ResponseRegistro>
+
+
+    @GET("DataWS?ApiCall=recoveryPSw")
+    fun recupearContrasenia(@Query ("email") email:String):Call<ResponseContrasenia>
 }
