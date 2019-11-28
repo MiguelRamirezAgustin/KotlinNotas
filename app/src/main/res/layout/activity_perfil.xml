@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_2"
+    android:orientation="vertical"
+    tools:context=".activities.PerfilActivity">
+
+
+
+    <ImageView
+        android:id="@+id/imgBackPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_keyboard"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtMiPerfil"
+            android:textColor="@color/colorBlanco"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="35dp"
+        android:orientation="vertical"
+        android:layout_marginRight="35dp">
+
+        <EditText
+            android:id="@+id/eTNombreP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txtNombre"/>
+
+        <EditText
+            android:id="@+id/eTApellidoPaternoP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txtApellidoPaterno"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/eTApellidoMaternoP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txtApellidoMaterno"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/eTCorreoP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="25"
+            android:singleLine="true"
+            android:hint="@string/txtCorreo"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/eTContraseniaP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_9"
+            android:paddingLeft="9dp"
+            android:drawablePadding="6dp"
+            android:cursorVisible="true"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/txt_Contraseña"
+            android:layout_marginTop="10dp"/>
+
+
+
+        <Button
+            android:id="@+id/btnActualizarP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtActualizarPerfil"
+            android:background="@drawable/rectangle_4"
+            android:textColor="@color/colorLetra"
+            android:layout_marginTop="35dp"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

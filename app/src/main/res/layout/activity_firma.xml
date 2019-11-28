@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:background="@drawable/splash_2"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -14,12 +15,40 @@
         android:src="@drawable/ic_keyboard"/>
 
     <LinearLayout
+        android:id="@+id/contentHubicacion"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+       <ImageView
+           android:id="@+id/imgLocatio"
+           android:layout_width="60dp"
+           android:layout_height="45dp"
+           android:src="@drawable/ic_location"/>
+
+        <TextView
+            android:id="@+id/tVLocation"
+            android:hint="@string/txt_geo"
+            android:layout_height="25dp"
+            android:layout_width="200dp"
+            android:layout_marginTop="10dp"
+            android:textSize="17sp"
+            android:textColor="@color/colorBlanco"
+            android:textColorHint="@color/colorBlanco"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:layout_below="@+id/contentHubicacion">
 
         <LinearLayout
             android:layout_width="wrap_content"

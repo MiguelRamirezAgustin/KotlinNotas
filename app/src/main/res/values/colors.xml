@@ -5,4 +5,9 @@
     <color name="colorAccent">#89125B</color>
     <color name="colorLetra">#1B7193</color>
     <color name="colorBlanco">#F3F1F2</color>
+    <color name="blueButton">#238da0</color>
+    <color name="startColor">#44e3ff</color>
+    <color name="endColor">#258191</color>
+    <color name="textColor">#ffffff</color>
+    <color name="blueText">#09236b</color>
 </resources>

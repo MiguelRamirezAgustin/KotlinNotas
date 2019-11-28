@@ -1,11 +1,27 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+	<!-- Base application theme. -->
+	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+		<!-- Customize your theme here. -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+	</style>
+
+
+	<style name="btnAzul" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">65dp</item>
+		<item name="android:layout_gravity">center_horizontal</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textColor">@color/textColor</item>
+		<item name="android:textSize">18sp</item>
+		<item name="android:minEms">6</item>
+		<item name="android:layout_marginTop">15dp</item>
+		<item name="android:textAllCaps">false</item>
+		<item name="android:padding">10dp</item>
+	</style>
+
+
 
 </resources>

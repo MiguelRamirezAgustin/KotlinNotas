@@ -1,8 +1,6 @@
 package com.example.congnitusfirma.dao
 
-import com.example.congnitusfirma.model.ResponseContrasenia
-import com.example.congnitusfirma.model.ResponseRegistro
-import com.example.congnitusfirma.model.UsuariosResponse
+import com.example.congnitusfirma.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -27,4 +25,7 @@ interface APIService {
 
     @GET("DataWS?ApiCall=recoveryPSw")
     fun recupearContrasenia(@Query ("email") email:String):Call<ResponseContrasenia>
+
+    @GET("DataWS?ApiCall=getProductos")
+    fun getProductos(): Call<ResponseProducto>
 }

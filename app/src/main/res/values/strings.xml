@@ -18,6 +18,11 @@
     <string name="add_fecha">Fecha</string>
     <string name="btn_fecha">Fecha</string>
     <string name="txtNotas">Notas</string>
+    <string name="txtProductos">Productos</string>
+    <string name="txtMiPerfil">Mi perfil</string>
+    <string name="txtActualizarPerfil">Actualizar perfil</string>
+    <string name="txt_geo">Mi geolocalización</string>
+    <string name="txtPerlfil">Perfi</string>
     <string name="txtFirma">Firma</string>
     <string name="txtNombreEmpleado">Nombre del empleado</string>
     <string name="txtFirmaLimpiar">Limpiar firma</string>

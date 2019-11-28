@@ -56,7 +56,7 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_41"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:textColor="@color/colorBlanco"
             android:textAllCaps="false"
             android:text="@string/txt_RecuperarContraseña"
@@ -70,7 +70,7 @@
         android:orientation="horizontal"
         android:gravity="bottom"
         android:layout_gravity="bottom"
-        android:layout_marginTop="210dp">
+        android:layout_marginTop="240dp">
 
         <TextView
             android:id="@+id/tVIniciarSesion"
@@ -78,6 +78,7 @@
             android:layout_height="match_parent"
             android:layout_weight="50"
             android:text="@string/txt_IniciarSesion"
+            android:textSize="@dimen/text"
             android:textColor="@color/colorBlanco"
             android:paddingLeft="20dp"/>
 
@@ -88,6 +89,7 @@
             android:layout_weight="50"
             android:gravity="right"
             android:text="@string/txtRegistrarme"
+            android:textSize="@dimen/text"
             android:textColor="@color/colorBlanco"
             android:paddingRight="20dp"/>
     </LinearLayout>

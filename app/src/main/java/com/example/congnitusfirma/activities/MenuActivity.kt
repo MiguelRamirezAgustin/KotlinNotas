@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.congnitusfirma.R
+import kotlinx.android.synthetic.main.activity_menu.*
 
 class MenuActivity : AppCompatActivity() {
 
@@ -20,15 +21,16 @@ class MenuActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val LiReportes = findViewById<LinearLayout>(R.id.LisReportes)
-        val LiFirma = findViewById<LinearLayout>(R.id.LiFirma)
+        val liReportes = findViewById<LinearLayout>(R.id.LisReportes)
+        val liFirma = findViewById<LinearLayout>(R.id.LiFirma)
         val btnSesion = findViewById<Button>(R.id.btnSesion)
         val nombre = findViewById<TextView>(R.id.tVNombreM)
-
+        val liProducto = findViewById<LinearLayout>(R.id.LiProductos)
+        val liPerfil = findViewById<LinearLayout>(R.id.LiPerfil)
 
 
         //Evento de reportes
-        LiReportes.setOnClickListener {
+        liReportes.setOnClickListener {
             val intent = Intent(this, ReportesActivity::class.java)
             startActivity(intent)
         }
@@ -59,6 +61,17 @@ class MenuActivity : AppCompatActivity() {
         LiFirma.setOnClickListener {
             startActivity(Intent(this, FirmaActivity::class.java))
             finish()
+        }
+
+        //evento productos
+        liProducto.setOnClickListener {
+            startActivity(Intent(this, ProductosActivity::class.java))
+
+        }
+
+        //Evento perfil
+        liPerfil.setOnClickListener {
+            startActivity(Intent(this, PerfilActivity::class.java))
         }
 
 

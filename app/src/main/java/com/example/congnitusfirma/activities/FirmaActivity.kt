@@ -1,9 +1,13 @@
 package com.example.congnitusfirma.activities
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.Signature
 import android.graphics.Bitmap
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -26,19 +30,31 @@ class FirmaActivity : AppCompatActivity() {
         val TAG = "Permissos--"
         private const val  REQUEST_INTERNET = 200
     }
+    private var locationManager : LocationManager? = null
+    private val TAG = "Permisos"
+    private val LOCATION_REQUEST = 1500
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firma)
 
         supportActionBar?.hide()
+        //inicializar variable
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
+
+        val imgMenuFirma = findViewById<ImageView>(R.id.imgMenuFirma)
+        val imgLocation = findViewById<ImageView>(R.id.imgLocatio)
 
         revisarPermisos()
-        val imgMenuFirma = findViewById<ImageView>(R.id.imgMenuFirma)
 
         imgMenuFirma.setOnClickListener {
             startActivity(Intent(this, MenuActivity::class.java))
             finish()
+        }
+
+        //geolocalizacion
+        imgLocation.setOnClickListener {
+            revisarPermisoLocation()
         }
 
 
@@ -95,6 +111,20 @@ class FirmaActivity : AppCompatActivity() {
 
     }
 
+    //Permisos location
+    fun revisarPermisoLocation(){
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_REQUEST
+            )
+            Log.i(TAG, "Pide permiso")
+        }else{
+            obtenerLocation()
+        }
+    }
+
     //Permisos
     fun revisarPermisos(){
         if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
@@ -110,6 +140,7 @@ class FirmaActivity : AppCompatActivity() {
         when (requestCode) {
             REQUEST_INTERNET -> if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.i(TAG, "Si dio permiso")
+                obtenerLocation()
             }else{
                 Log.i(TAG, "No dio permiso")
                 //Permisos necesarios
@@ -152,6 +183,27 @@ class FirmaActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+    }
+
+    //obtenerLocation
+    fun obtenerLocation(){
+        try {
+            Toast.makeText(this, "Obteniendo....", Toast.LENGTH_SHORT).show()
+            //Localizacion update
+            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
+        }catch (ex:SecurityException){
+            Log.i(TAG, "Security Exception, on location availble")
+        }
+    }
+
+    private val locationListener:LocationListener= object :LocationListener{
+        override fun onLocationChanged(location: Location) {
+            tVLocation.text= "${location.longitude}   :  ${location.longitude}"
+        }
+
+        override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+        override fun onProviderDisabled(provider: String?) {}
+        override fun onProviderEnabled(provider: String?) {}
     }
 
     override fun onBackPressed() {
