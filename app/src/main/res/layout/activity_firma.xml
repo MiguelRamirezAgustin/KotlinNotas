@@ -32,7 +32,7 @@
             android:id="@+id/tVLocation"
             android:hint="@string/txt_geo"
             android:layout_height="25dp"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="17sp"
             android:textColor="@color/colorBlanco"

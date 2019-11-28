@@ -9,7 +9,6 @@
     tools:context=".activities.PerfilActivity">
 
 
-
     <ImageView
         android:id="@+id/imgBackPerfil"
         android:layout_width="wrap_content"
@@ -25,10 +24,31 @@
         android:layout_marginTop="15dp"
         android:layout_gravity="center">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo"/>
+            android:orientation="horizontal">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imgPerfil"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/logo"
+                app:civ_border_color="#DD129A"
+                app:civ_border_width="1dp"
+                app:civ_shadow="true"
+                app:civ_shadow_radius="10"
+                app:civ_shadow_color="#1B80FA"/>
+
+            <ImageView
+                android:id="@+id/imgCamara"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="-30dp"
+                android:src="@drawable/ic_edit"
+                android:layout_gravity="right"/>
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +57,7 @@
             android:textColor="@color/colorBlanco"
             android:textSize="25sp"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="13dp"/>
 
     </LinearLayout>
 
@@ -50,7 +70,7 @@
         android:layout_marginRight="35dp">
 
         <EditText
-            android:id="@+id/eTNombreP"
+            android:id="@+id/eTNombrePerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"
@@ -62,7 +82,7 @@
             android:hint="@string/txtNombre"/>
 
         <EditText
-            android:id="@+id/eTApellidoPaternoP"
+            android:id="@+id/eTApellidoPaternoPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"
@@ -75,7 +95,7 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/eTApellidoMaternoP"
+            android:id="@+id/eTApellidoMaternoPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"
@@ -88,7 +108,7 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/eTCorreoP"
+            android:id="@+id/eTCorreoPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"
@@ -101,7 +121,7 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/eTContraseniaP"
+            android:id="@+id/eTContraseniaPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"

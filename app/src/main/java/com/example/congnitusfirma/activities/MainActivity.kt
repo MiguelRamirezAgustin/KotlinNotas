@@ -80,15 +80,37 @@ class MainActivity : AppCompatActivity() {
             val respuesta = call.body() as UsuariosResponse
             uiThread {
                 if(respuesta.validoLogin == "1") {
+                    /* response de login
+                    *
+                    * {
+                    "valido": "1",
+                    "usuario": {
+                        "usr_rutafoto": "media/usuario/12_20191128130512.jpeg",
+                        "usr_email": "miguel@hola.com",
+                        "usr_id": "15",
+                        "usr_apm": "AgustÃ­n",
+                        "usr_nombre": "Miguel",
+                        "usr_app": "Ramirez"
+                      }
+                    }
+                    * */
 
                     val usrIds = respuesta.usuarioLogin?.usrId
                     val usrNombre = respuesta.usuarioLogin?.usrNombre
+                    val usrEmail = respuesta.usuarioLogin?.usrEmail
+                    val usrImg = respuesta.usuarioLogin?.usrRutaFoto
+                    val usrApp = respuesta.usuarioLogin?.usrApp
+                    val usrApm = respuesta.usuarioLogin?.usrApm
 
-                    Log.d("UserPreferenses ", usrIds+ " - "+ usrNombre )
+                    Log.d("UserPreferenses ", usrIds+ " "+ usrNombre+ " "+usrEmail+" "+usrApp+" "+usrApm  )
 
+                    //Guardar datos de sesion
                     val sharedPreferences= getSharedPreferences("my_aplicacion_firma", Context.MODE_PRIVATE)
                     var editor = sharedPreferences.edit()
                     editor.putString("usr_id", usrIds)
+                    editor.putString("usr_email", usrEmail)
+                    editor.putString("usr_App", usrApp)
+                    editor.putString("usr_Apm", usrApm)
                     editor.putString("usr_name", usrNombre)
                     editor.commit()
 

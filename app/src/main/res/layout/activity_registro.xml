@@ -48,7 +48,7 @@
         android:layout_marginRight="35dp">
 
         <EditText
-            android:id="@+id/eTNombreR"
+            android:id="@+id/eTNombreRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"
@@ -60,7 +60,7 @@
             android:hint="@string/txtNombre"/>
 
         <EditText
-            android:id="@+id/eTApellidoPaternoR"
+            android:id="@+id/eTApellidoPaternoRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"
@@ -73,7 +73,7 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/eTApellidoMaternoR"
+            android:id="@+id/eTApellidoMaternoRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"
@@ -86,7 +86,7 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/eTCorreoR"
+            android:id="@+id/eTCorreoRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"
@@ -99,7 +99,7 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/eTContraseñaR"
+            android:id="@+id/eTContraseniaRegistro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"
@@ -112,7 +112,7 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/eTContraseñaRepetirR"
+            android:id="@+id/eTContraseniaRegistroVerificar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_9"

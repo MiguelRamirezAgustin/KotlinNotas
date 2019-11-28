@@ -18,8 +18,8 @@ class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-
         supportActionBar?.hide()
+
 
         val liReportes = findViewById<LinearLayout>(R.id.LisReportes)
         val liFirma = findViewById<LinearLayout>(R.id.LiFirma)

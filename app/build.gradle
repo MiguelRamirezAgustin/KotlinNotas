@@ -51,4 +51,8 @@ dependencies {
 
     //firma
     implementation 'com.github.gcacace:signature-pad:1.2.1'
+
+    //imagen circular
+    implementation 'com.mikhaellopez:circularimageview:4.1.0'
+    implementation 'com.facebook.fresco:fresco:2.0.0'
 }

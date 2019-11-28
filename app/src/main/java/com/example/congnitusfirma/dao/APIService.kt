@@ -18,14 +18,32 @@ interface APIService {
         @Query ("email") correoR:String,
         @Query ("nombre") nombreR:String,
         @Query ("app") apellidoPR:String,
-        @Query ("apm ") apellidoMR:String,
+        @Query ("apm") apellidoMR:String,
         @Query ("nip") contraR:String
     ): Call<ResponseRegistro>
 
+   /* "usr_rutafoto": "media/usuario/12_20191128130512.jpeg",
+    "usr_email": "miguel1@hola.com.mx",
+    "usr_id": "25",
+    "usr_apm": "ramirez",
+    "usr_nombre": "miguel",
+    "usr_app": "ramirez"*/
 
     @GET("DataWS?ApiCall=recoveryPSw")
     fun recupearContrasenia(@Query ("email") email:String):Call<ResponseContrasenia>
 
     @GET("DataWS?ApiCall=getProductos")
     fun getProductos(): Call<ResponseProducto>
+
+    //Acualizar fin foto
+    //35.155.161.8:8080/WSExample/DataWS?ApiCall=updateUsr
+    // &usrid=1 &email=miguel@hola.com &nip=123 &nombre=uanito &app=flores &apm=
+
+    @GET("DataWS?ApiCall=updateUsr")
+    fun updateUser(@Query("usrid") updateUsrid:String,
+                   @Query("email") updateEmail:String,
+                   @Query("nip") updateNip:String,
+                   @Query("nombre") updateName:String,
+                   @Query("app") updateApp:String,
+                   @Query("apm") updateApm:String):Call<ResponseUpdate>
 }

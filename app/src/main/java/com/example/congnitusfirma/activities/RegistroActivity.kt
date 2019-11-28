@@ -33,12 +33,12 @@ class RegistroActivity : AppCompatActivity() {
 
         val imgMenu = findViewById<ImageView>(R.id.imgMenuRegistro)
         val tvSesion = findViewById<TextView>(R.id.tVSesion)
-        val email = findViewById<EditText>(R.id.eTCorreoR)
-        val nombre = findViewById<EditText>(R.id.eTNombreR)
-        val apellidoP = findViewById<EditText>(R.id.eTApellidoPaternoR)
-        val apellidoM = findViewById<EditText>(R.id.eTApellidoMaternoR)
-        val contrasenia = findViewById<EditText>(R.id.eTContraseñaR)
-        val contraseniaRepetir = findViewById<EditText>(R.id.eTContraseñaRepetirR)
+        val email = findViewById<EditText>(R.id.eTCorreoRegistro)
+        val nombre = findViewById<EditText>(R.id.eTNombreRegistro)
+        val apellidoP = findViewById<EditText>(R.id.eTApellidoPaternoRegistro)
+        val apellidoM = findViewById<EditText>(R.id.eTApellidoMaternoRegistro)
+        val contrasenia = findViewById<EditText>(R.id.eTContraseniaRegistro)
+        val contraseniaRepetir = findViewById<EditText>(R.id.eTContraseniaRegistroVerificar)
         val btnResitro = findViewById<Button>(R.id.btnRegistro)
 
 
@@ -68,24 +68,30 @@ class RegistroActivity : AppCompatActivity() {
                   Log.d("TAG","Evento 1")
                   if(contrasenia.text.toString().equals(contraseniaRepetir.text.toString())){
                       doAsync {
-                          val call = registroRetrofi().create(APIService::class.java).registroUser(
-                              ""+email.text.toString(),""+nombre.text.toString(),
-                              ""+apellidoP.text.toString(),""+apellidoM.text.toString(),""+contrasenia.text.toString()).execute()
+                          val call = registroRetrofi().create(APIService::class.java).registroUser(email.text.toString(),nombre.text.toString(),
+                              apellidoP.text.toString(),apellidoM.text.toString(),contrasenia.text.toString()).execute()
                           val respuesta = call.body() as ResponseRegistro
+                          //el ejemplo de la respuesta esta comentado abajo
                           Log.i("Valor", "respuesta--- "+respuesta.valido)
                           uiThread{
                               if(respuesta.valido == "1"){
                                   val usrIds = respuesta.registroU.usrid
                                   val usrNombre = respuesta.registroU.usrNombre
+                                  val usrEmail = respuesta.registroU.usrEmail
+                                  val usrApp = respuesta.registroU.usrApp
+                                  val usrApm = respuesta.registroU.usrApm
 
                                   val ms = respuesta.mensaje
 
-                                  Log.d("UserPreferenses ", usrIds+ " - "+ usrNombre )
+                                  Log.d("UserPreferenses ", usrIds+ " - "+ usrNombre+ " "+ usrApp+ " "+usrApm+" "+usrEmail )
 
                                   val sharedPreferences= getSharedPreferences("my_aplicacion_firma", Context.MODE_PRIVATE)
                                   var editor = sharedPreferences.edit()
                                   editor.putString("usr_id", usrIds)
                                   editor.putString("usr_name", usrNombre)
+                                  editor.putString("usr_email", usrEmail)
+                                  editor.putString("usr_App", usrApp)
+                                  editor.putString("usr_Apm", usrApm)
                                   editor.commit()
 
                                   val intent = Intent(this@RegistroActivity, MenuActivity::class.java)
@@ -95,12 +101,6 @@ class RegistroActivity : AppCompatActivity() {
                                   startActivity(intent)
                               }else{
                                   showErrorDialog()
-                                  email.setText("")
-                                  nombre.setText("")
-                                  apellidoP.setText("")
-                                  apellidoM.setText("")
-                                  contrasenia.setText("")
-                                  contraseniaRepetir.setText("")
                               }
                           }
                       }
@@ -138,3 +138,19 @@ class RegistroActivity : AppCompatActivity() {
     }
 
 }
+
+
+/* response de registro
+*{
+    "valido": "1",
+    "mensaje": "Bienvenido",
+    "registro": {
+        "usr_email": "miguel@hola.com.mx",
+        "usr_id": "11",
+        "usr_apm": "ramirez",
+        "usr_nombre": "miguel",
+        "usr_app": "ramirez"
+    }
+}
+*
+**/

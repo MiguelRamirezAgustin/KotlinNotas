@@ -41,7 +41,7 @@
             android:maxLength="30"
             android:singleLine="true"
             android:drawablePadding="6dp"
-            android:text="juan@hola.com.mx"/>
+            android:text="miguel@hola.com"/>
 
         <EditText
             android:id="@+id/eTContraseña"
