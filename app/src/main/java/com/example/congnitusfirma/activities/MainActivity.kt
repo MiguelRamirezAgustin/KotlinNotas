@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                     val usrApp = respuesta.usuarioLogin?.usrApp
                     val usrApm = respuesta.usuarioLogin?.usrApm
 
-                    Log.d("UserPreferenses ", usrIds+ " "+ usrNombre+ " "+usrEmail+" "+usrApp+" "+usrApm  )
+                    Log.d("UserPreferenses ", usrIds+ " "+ usrNombre+ " "+usrEmail+" "+usrApp+" "+usrApm+ " "+usrImg   )
 
                     //Guardar datos de sesion
                     val sharedPreferences= getSharedPreferences("my_aplicacion_firma", Context.MODE_PRIVATE)
@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity() {
                     editor.putString("usr_App", usrApp)
                     editor.putString("usr_Apm", usrApm)
                     editor.putString("usr_name", usrNombre)
+                    editor.putString("usr_Img", usrImg)
                     editor.commit()
 
                     val intent = Intent(applicationContext, MenuActivity::class.java)

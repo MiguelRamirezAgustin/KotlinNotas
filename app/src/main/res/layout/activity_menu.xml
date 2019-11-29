@@ -67,15 +67,18 @@
                 android:background="@drawable/bordermenu">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_laptop"/>
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/not"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:gravity="center"
+                    android:fontFamily="sans-serif-medium"
                     android:textColor="@color/colorBlanco"
                     android:text="@string/txtNotas"/>
             </LinearLayout>
@@ -92,15 +95,18 @@
                 android:background="@drawable/bordermenu">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_laptop"/>
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/fir"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:gravity="center"
+                    android:fontFamily="sans-serif-medium"
                     android:textColor="@color/colorBlanco"
                     android:text="@string/txtFirma"/>
             </LinearLayout>
@@ -123,15 +129,18 @@
                 android:background="@drawable/bordermenu">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_laptop"/>
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/aur"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:gravity="center"
+                    android:fontFamily="sans-serif-medium"
                     android:textColor="@color/colorBlanco"
                     android:text="@string/txtProductos"/>
             </LinearLayout>
@@ -148,16 +157,19 @@
                 android:background="@drawable/bordermenu">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_laptop"/>
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/usr"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorBlanco"
                     android:gravity="center"
+                    android:fontFamily="sans-serif-medium"
                     android:text="@string/txtPerlfil"/>
             </LinearLayout>
         </LinearLayout>

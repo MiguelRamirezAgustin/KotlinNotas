@@ -32,8 +32,10 @@ interface APIService {
     @GET("DataWS?ApiCall=recoveryPSw")
     fun recupearContrasenia(@Query ("email") email:String):Call<ResponseContrasenia>
 
+
     @GET("DataWS?ApiCall=getProductos")
-    fun getProductos(): Call<ResponseProducto>
+    fun getProductos(): Call<ResponseProductos>
+
 
     //Acualizar fin foto
     //35.155.161.8:8080/WSExample/DataWS?ApiCall=updateUsr
@@ -46,4 +48,10 @@ interface APIService {
                    @Query("nombre") updateName:String,
                    @Query("app") updateApp:String,
                    @Query("apm") updateApm:String):Call<ResponseUpdate>
+
+    //http://35.155.161.8:8080/WSExample/DataWS?ApiCall=setProdOrder&idproducto=2
+    @GET("DataWS?ApiCall=setProdOrder")
+    fun getOrden(@Query("id_producto")idProducto:String):Call<ResponseOrder>
+
+
 }

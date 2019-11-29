@@ -25,8 +25,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
 import androidx.databinding.DataBindingUtil.setContentView
+import com.bumptech.glide.Glide
 import com.example.congnitusfirma.R
 import com.example.congnitusfirma.dao.APIService
+import com.example.congnitusfirma.model.ResponseRegistro
 import com.example.congnitusfirma.model.ResponseUpdate
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.common.ResizeOptions
@@ -48,6 +50,7 @@ class PerfilActivity : AppCompatActivity() {
     private  val GALLERY = 1
     private val CAMERA = 2
     private val IMAGE_DIRECTORY = "/demonuts"
+    private var imgP :String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +65,13 @@ class PerfilActivity : AppCompatActivity() {
         val usrEmail = sharedPreferences.getString("usr_email","")
         val usrApp = sharedPreferences.getString("usr_App","")
         val usrApm = sharedPreferences.getString("usr_Apm","")
-        Log.d("--->", usrId)
+        imgP = sharedPreferences.getString("usr_Img", "")
+        Log.d("--->", usrId+" "+ imgP)
+
+        val requesManager = Glide.with(this)
+        val requesBuilder= requesManager.load("http://35.155.161.8:8080/WSExample/"+imgP)
+        Log.d("TAG", "ImgURL "+ requesBuilder)
+        requesBuilder.into(imgPerfil)
 
 
 
@@ -120,11 +129,6 @@ class PerfilActivity : AppCompatActivity() {
                         alerDialog.title("Alert")
                         alerDialog.message(""+respuesta.mensaje)
                         alerDialog.yesButton { "Si"
-                            nombre.setText("")
-                            correo.setText("")
-                            contrasenia.setText("")
-                            apellidoM.setText("")
-                            apellidoP.setText("")
                         }
                         alerDialog.show()
 
@@ -134,11 +138,14 @@ class PerfilActivity : AppCompatActivity() {
             }
         }
 
+        //evento para camara
         imgCamara.setOnClickListener{
             showPictureDialg()
         }
 
     }
+
+
 
     //dialogo para galeria y camara
     private  fun showPictureDialg(){

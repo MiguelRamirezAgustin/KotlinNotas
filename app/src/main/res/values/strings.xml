@@ -28,7 +28,7 @@
     <string name="txtFirmaLimpiar">Limpiar firma</string>
     <string name="txtFirmaGuadar">Guadar firma</string>
 
-
     //servicos
     <string name="ws_url_login">http://35.155.161.8:8080/WSExample/DataWS?ApiCall=</string>
+    <string name="ws_url_Base">http://35.155.161.8:8080/WSExample/</string>
 </resources>

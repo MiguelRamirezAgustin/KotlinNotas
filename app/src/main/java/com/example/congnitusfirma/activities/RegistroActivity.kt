@@ -1,29 +1,46 @@
 package com.example.congnitusfirma.activities
 
+import android.Manifest
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.media.MediaScannerConnection
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.congnitusfirma.R
 import com.example.congnitusfirma.dao.APIService
 import com.example.congnitusfirma.model.ResponseRegistro
 import com.example.congnitusfirma.model.UsuariosResponse
 import com.example.congnitusfirma.utilities.Utils
+import kotlinx.android.synthetic.main.activity_perfil.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.*
 
 class RegistroActivity : AppCompatActivity() {
 
-    lateinit var UsrEmail: String
-    lateinit var UsrNombre: String
-    lateinit var UsrApellidoP: String
-    lateinit var UsrApellidoM:String
-    lateinit var UsrContraseña:String
+    private val TAKE_PHOTO_REQUEST = 101
+    private val PERMISSION_CODE = 1001
+    private  val GALLERY = 1
+    private val CAMERA = 2
+    private val IMAGE_DIRECTORY = "/demonuts"
+    private var imgP :String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +97,7 @@ class RegistroActivity : AppCompatActivity() {
                                   val usrEmail = respuesta.registroU.usrEmail
                                   val usrApp = respuesta.registroU.usrApp
                                   val usrApm = respuesta.registroU.usrApm
+                                  val usrImg = respuesta.registroU.usrImg
 
                                   val ms = respuesta.mensaje
 
@@ -92,6 +110,7 @@ class RegistroActivity : AppCompatActivity() {
                                   editor.putString("usr_email", usrEmail)
                                   editor.putString("usr_App", usrApp)
                                   editor.putString("usr_Apm", usrApm)
+                                  editor.putString("usr_Img", usrImg)
                                   editor.commit()
 
                                   val intent = Intent(this@RegistroActivity, MenuActivity::class.java)
@@ -120,6 +139,150 @@ class RegistroActivity : AppCompatActivity() {
               }
             }
         }
+
+
+        //evento para camara
+        imgPerfil.setOnClickListener{
+            showPictureDialg()
+        }
+    }
+
+    //dialogo para galeria y camara
+    private  fun showPictureDialg(){
+        val pictureDoalog = AlertDialog.Builder(this)
+        pictureDoalog.setTitle("Seleccione opcion para cambiar imagen de perfil")
+        val dialogItem = arrayOf("Acceder a galeria", "Acceder a camara")
+        pictureDoalog.setItems(
+                dialogItem
+        ) { dialog, which ->
+            when (which) {
+                0 -> permisoGaleria()
+                1 -> permisoCamara()
+            }
+        }
+        pictureDoalog.show()
+    }
+
+    fun permisoGaleria(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_DENIED){
+                //permission requerido
+                val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                //show popup
+                requestPermissions(permissions, PERMISSION_CODE)
+            }
+            else{
+                //permission otorgados
+                choosePhotoFromGallary()
+            }
+        }
+        else{
+            //system OS  < Marshmallow
+            choosePhotoFromGallary()
+        }
+    }
+
+
+    fun choosePhotoFromGallary(){
+        val galleryIntent = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        startActivityForResult(galleryIntent, GALLERY)
+    }
+
+    fun permisoCamara(){
+        revisaPermiso()
+    }
+
+    fun takePhotoFromCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, CAMERA)
+    }
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GALLERY){
+            if (data != null){
+                val contentURL = data!!.data
+                try {
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURL)
+                    val path = saveImage(bitmap)
+                    Toast.makeText(this@RegistroActivity, "Image Saved!", Toast.LENGTH_SHORT).show()
+                    imgPerfil.setImageBitmap(bitmap)
+                }catch (e: IOException){
+                    e.printStackTrace()
+                    Toast.makeText(this@RegistroActivity, "Fallo", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }else if( requestCode == CAMERA){
+            val thumbnail = data!!.extras!!.get("data") as Bitmap
+            imgPerfil.setImageBitmap(thumbnail)
+            saveImage(thumbnail)
+        }
+    }
+
+    fun revisaPermiso(){
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    TAKE_PHOTO_REQUEST
+            )
+            Log.i("Permisos", "Pide Permiso")
+        }else{
+            //ya tinene permisos
+            takePhotoFromCamera()
+        }
+    }
+
+
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when (requestCode) {
+            TAKE_PHOTO_REQUEST -> if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                takePhotoFromCamera()
+            }else{
+                Log.i("TAG", "No dio permiso")
+            }
+        }
+    }
+
+
+    fun saveImage(myButmap: Bitmap):String{
+        val bytes = ByteArrayOutputStream()
+        myButmap.compress(Bitmap.CompressFormat.JPEG, 90 , bytes)
+        val wallpaperDirectory = File((Environment.getExternalStorageDirectory().toString() + IMAGE_DIRECTORY)
+        )
+
+        //buil the directory structure
+        Log.d("file", wallpaperDirectory.toString())
+        if(!wallpaperDirectory.exists()){
+            wallpaperDirectory.mkdir()
+        }
+        try {
+            val f = File(
+                    wallpaperDirectory, ((Calendar.getInstance()
+                    .getTimeInMillis()).toString() + ".jpg")
+            )
+            f.createNewFile()
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(
+                    this,
+                    arrayOf(f.getPath()),
+                    arrayOf("image/jpeg"), null
+            )
+            fo.close()
+            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath())
+        }catch (e: IOException){
+            e.printStackTrace()
+        }
+        return  ""
     }
 
 
