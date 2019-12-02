@@ -1,6 +1,7 @@
 package com.example.congnitusfirma.dao
 
 import com.example.congnitusfirma.model.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -52,6 +53,13 @@ interface APIService {
     //http://35.155.161.8:8080/WSExample/DataWS?ApiCall=setProdOrder&idproducto=2
     @GET("DataWS?ApiCall=setProdOrder")
     fun getOrden(@Query("id_producto")idProducto:String):Call<ResponseOrder>
+
+
+    //Servicio de tipo multipart
+    //MultipartBody para cada dato a enviar se necesita un MultipartBody, y se optiene la respuesta ServerResponse
+    @Multipart
+    @POST("DataWS")
+    fun registroPerfil(@Part partMap: List<MultipartBody.Part> ): Call<ServerResponse>
 
 
 }

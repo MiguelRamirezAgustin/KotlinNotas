@@ -32,6 +32,7 @@ class ProductoAdpater (private val context: ProductosActivity, private val produ
         val imgUrl = productoModel.prodImg
         val requesBuilder = requesManager.load("http://35.155.161.8:8080/WSExample/$imgUrl")
         requesBuilder.into(holder.fotoProducto)
+
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetalleProductoActivity::class.java)
             intent.putExtra("titleProducto", ""+productoModel.prodTit)

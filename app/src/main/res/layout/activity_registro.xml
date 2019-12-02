@@ -30,7 +30,7 @@
             app:civ_border_color="#DD129A"
             app:civ_border_width="1dp"
             app:civ_shadow="true"
-            android:src="@drawable/ic_camera"
+            android:src="@drawable/usr"
             app:civ_shadow_radius="10"
             app:civ_shadow_color="#1B80FA"/>
 

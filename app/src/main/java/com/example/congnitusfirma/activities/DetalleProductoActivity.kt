@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.example.congnitusfirma.R
 import com.example.congnitusfirma.dao.APIService
 import com.example.congnitusfirma.model.ResponseOrder
-import org.jetbrains.anko.AlertDialogBuilder
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -18,7 +17,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class DetalleProductoActivity : AppCompatActivity() {
+
     var strId: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_producto)
@@ -73,9 +74,6 @@ class DetalleProductoActivity : AppCompatActivity() {
 
     }
 
-
-
-
     private fun orderRetrofit(): Retrofit {
         return Retrofit.Builder()
                 .baseUrl("http://35.155.161.8:8080/WSExample/")
@@ -88,4 +86,5 @@ class DetalleProductoActivity : AppCompatActivity() {
             yesButton { }
         }.show()
     }
+
 }
