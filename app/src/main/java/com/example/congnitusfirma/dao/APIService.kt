@@ -42,6 +42,7 @@ interface APIService {
     //35.155.161.8:8080/WSExample/DataWS?ApiCall=updateUsr
     // &usrid=1 &email=miguel@hola.com &nip=123 &nombre=uanito &app=flores &apm=
 
+    //Actualizar con foto
     @GET("DataWS?ApiCall=updateUsr")
     fun updateUser(@Query("usrid") updateUsrid:String,
                    @Query("email") updateEmail:String,
@@ -49,6 +50,11 @@ interface APIService {
                    @Query("nombre") updateName:String,
                    @Query("app") updateApp:String,
                    @Query("apm") updateApm:String):Call<ResponseUpdate>
+
+    //ActualizarImg
+    @Multipart
+    @POST("DataWS")
+    fun updateUserImg(@Part partMap: List<MultipartBody.Part> ):Call<ResponseUpdateImg>
 
     //http://35.155.161.8:8080/WSExample/DataWS?ApiCall=setProdOrder&idproducto=2
     @GET("DataWS?ApiCall=setProdOrder")

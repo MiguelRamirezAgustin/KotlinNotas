@@ -104,7 +104,7 @@ class RegistroActivity : AppCompatActivity() {
                         } else {
                             doAsync {
                                 var photoFile: File? = null
-                                photoFile = File(postPath)  //se optiene la ruta de la imagen postPath y la convierte en File
+                                photoFile = File(postPath)  //contiene la ruta de la imagen postPath y la convierte en File
                                 val partes = ArrayList<MultipartBody.Part>()
                                 partes.add(MultipartBody.Part.createFormData("ApiCall", "setRegisterUsr"))
                                 partes.add(MultipartBody.Part.createFormData("email", email.text.toString()))
@@ -242,7 +242,6 @@ class RegistroActivity : AppCompatActivity() {
     }
 
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GALLERY){
@@ -287,9 +286,6 @@ class RegistroActivity : AppCompatActivity() {
         }
     }
 
-
-
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             TAKE_PHOTO_REQUEST -> if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -299,7 +295,6 @@ class RegistroActivity : AppCompatActivity() {
             }
         }
     }
-
 
     fun saveImage(myButmap: Bitmap):String{
         val bytes = ByteArrayOutputStream()
@@ -326,14 +321,14 @@ class RegistroActivity : AppCompatActivity() {
                     arrayOf("image/jpeg"), null
             )
             fo.close()
+            postPath = f.getAbsolutePath()
+            // return  f.getAbsolutePath()
             Log.d("TAG", "File Saved::--->" + f.getAbsolutePath())
         }catch (e: IOException){
             e.printStackTrace()
         }
         return  ""
     }
-
-
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
@@ -347,6 +342,7 @@ class RegistroActivity : AppCompatActivity() {
             yesButton { "Si" }
         }.show()
     }
+
 
 }
 

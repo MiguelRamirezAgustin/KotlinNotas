@@ -1,14 +1,12 @@
 package com.example.congnitusfirma.activities
 
 import android.Manifest
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.ContentProvider
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
@@ -16,24 +14,21 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.webkit.MimeTypeMap
 import android.widget.EditText
-import android.widget.Gallery
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toFile
-import androidx.databinding.DataBindingUtil.setContentView
 import com.bumptech.glide.Glide
 import com.example.congnitusfirma.R
 import com.example.congnitusfirma.dao.APIService
-import com.example.congnitusfirma.model.ResponseRegistro
-import com.example.congnitusfirma.model.ResponseUpdate
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.common.ResizeOptions
-import com.facebook.imagepipeline.request.ImageRequestBuilder
+import com.example.congnitusfirma.model.ResponseUpdateImg
 import kotlinx.android.synthetic.main.activity_perfil.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.jetbrains.anko.AlertDialogBuilder
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.doAsync
@@ -49,8 +44,11 @@ class PerfilActivity : AppCompatActivity() {
     private val PERMISSION_CODE = 1001
     private  val GALLERY = 1
     private val CAMERA = 2
-    private val IMAGE_DIRECTORY = "/demonuts"
+    private val IMAGE_DIRECTORY = "/demosImg"
     private var imgP :String? = null
+
+    private var mediaPath: String? = null
+    private var postPath: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +64,7 @@ class PerfilActivity : AppCompatActivity() {
         val usrApp = sharedPreferences.getString("usr_App","")
         val usrApm = sharedPreferences.getString("usr_Apm","")
         imgP = sharedPreferences.getString("usr_Img", "")
+
         Log.d("--->", usrId+" "+ imgP)
 
         val requesManager = Glide.with(this)
@@ -79,7 +78,7 @@ class PerfilActivity : AppCompatActivity() {
         val nombre = findViewById<EditText>(R.id.eTNombrePerfil)
         val apellidoP= findViewById<EditText>(R.id.eTApellidoPaternoPerfil)
         val apellidoM = findViewById<EditText>(R.id.eTApellidoMaternoPerfil)
-        val correo = findViewById<EditText>(R.id.eTCorreoPerfil)
+        val email = findViewById<EditText>(R.id.eTCorreoPerfil)
         val contrasenia = findViewById<EditText>(R.id.eTContraseniaPerfil)
 
 
@@ -87,8 +86,13 @@ class PerfilActivity : AppCompatActivity() {
         nombre.setText(usrNombre)
         apellidoM.setText(usrApm)
         apellidoP.setText(usrApp)
-        correo.setText(usrEmail)
+        email.setText(usrEmail)
 
+
+        //evento para camara
+        imgCamara.setOnClickListener{
+            showPictureDialg()
+        }
 
         //evento regreso a menu
         imgBakc.setOnClickListener {
@@ -99,31 +103,42 @@ class PerfilActivity : AppCompatActivity() {
         //Evento actualizar
         btnActualizarP.setOnClickListener {
             doAsync {
-                val call = updateRetrofit().create(APIService::class.java).updateUser(
-                        ""+usrId,""+correo.text.toString(), ""+contrasenia.text.toString(),
-                        ""+nombre.text.toString(), ""+apellidoP.text.toString(), ""+apellidoM.text.toString()).execute()
-                val respuesta = call.body() as ResponseUpdate
+                var photoFile: File? = null
+                photoFile = File(postPath)  //contiene la ruta de la imagen postPath y la convierte en File
+                val partes = ArrayList<MultipartBody.Part>()
+                partes.add(MultipartBody.Part.createFormData("ApiCall", "editRegisterUsr"))
+                partes.add(MultipartBody.Part.createFormData("archivo", photoFile?.name,
+                        photoFile?.crearMultiparte()))
+                partes.add(MultipartBody.Part.createFormData("nombre", nombre.text.toString()))
+                partes.add(MultipartBody.Part.createFormData("apm", apellidoP.text.toString()))
+                partes.add(MultipartBody.Part.createFormData("app", apellidoM.text.toString()))
+                partes.add(MultipartBody.Part.createFormData("email", email.text.toString()))
+                partes.add(MultipartBody.Part.createFormData("nip", contrasenia.text.toString()))
+                partes.add(MultipartBody.Part.createFormData("usrid", contrasenia.text.toString()))
+
+                val call = updateRetrofit().create(APIService::class.java).updateUserImg(partes)?.execute()
+                val respuesta = call.body() as ResponseUpdateImg
                 Log.i("TAG", "Response update "+ respuesta.mensaje)
-                /* response de actualizar
-                {
-                    "valido": "1",
-                    "mensaje": "Actualizado correctamente"
-                }
-                * */
-                uiThread{
+                uiThread {
                     if(respuesta.valido == "1"){
+
+                        val usrImg = respuesta.update.usrImg
+                        val sharedPreferences= getSharedPreferences("my_aplicacion_firma", Context.MODE_PRIVATE)
+                        var editor = sharedPreferences.edit()
+                        editor.putString("usr_Img", usrImg)
+                        editor.commit()
+
                         val alerDialog = AlertDialogBuilder(this@PerfilActivity)
                         alerDialog.title("Alerta")
                         alerDialog.message(""+respuesta.mensaje)
                         alerDialog.yesButton { "Si"
                             nombre.setText("")
-                            correo.setText("")
+                            email.setText("")
                             contrasenia.setText("")
                             apellidoM.setText("")
                             apellidoP.setText("")
                         }
                         alerDialog.show()
-
                     }else if(respuesta.valido == "0"){
                         val alerDialog = AlertDialogBuilder(this@PerfilActivity)
                         alerDialog.title("Alert")
@@ -131,21 +146,26 @@ class PerfilActivity : AppCompatActivity() {
                         alerDialog.yesButton { "Si"
                         }
                         alerDialog.show()
-
                     }
                 }
-
             }
         }
 
-        //evento para camara
-        imgCamara.setOnClickListener{
-            showPictureDialg()
-        }
 
     }
 
-
+    fun File.crearMultiparte(): RequestBody {
+        var type: String? = null
+        val extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(this).toString())
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
+        }
+        Log.d("ImagenUtil", "uri: " + Uri.fromFile(this))
+        Log.d("ImagenUtil", "type: " + type!!)
+        return RequestBody.create(
+                MediaType.parse("image/*"), this
+        )
+    }
 
     //dialogo para galeria y camara
     private  fun showPictureDialg(){
@@ -162,7 +182,6 @@ class PerfilActivity : AppCompatActivity() {
         }
         pictureDoalog.show()
     }
-
 
     fun permisoGaleria(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -207,12 +226,20 @@ class PerfilActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GALLERY){
             if (data != null){
-                val contentURL = data!!.data
+                val contentURI = data!!.data
+                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
                 try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURL)
-                    val path = saveImage(bitmap)
-                    Toast.makeText(this@PerfilActivity, "Image Saved!", Toast.LENGTH_SHORT).show()
-                    imgPerfil.setImageBitmap(bitmap)
+                    val cursor = contentResolver.query(contentURI!!, filePathColumn, null, null, null)
+                    assert(cursor != null)
+                    cursor!!.moveToFirst()
+                    val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+                    mediaPath = cursor.getString(columnIndex)
+                    // Set the Image in ImageView for Previewing the Media
+                    imgPerfil.setImageBitmap(BitmapFactory.decodeFile(mediaPath))
+                    cursor.close()
+                    cursor.close()
+                    //postPath contiene la ruta de la imagen
+                    postPath = mediaPath
                 }catch (e:IOException){
                  e.printStackTrace()
                     Toast.makeText(this@PerfilActivity, "Fallo", Toast.LENGTH_SHORT).show()
@@ -278,6 +305,7 @@ class PerfilActivity : AppCompatActivity() {
                     arrayOf("image/jpeg"), null
             )
             fo.close()
+            postPath = f.getAbsolutePath()
             Log.d("TAG", "File Saved::--->" + f.getAbsolutePath())
         }catch (e:IOException){
             e.printStackTrace()
@@ -302,3 +330,48 @@ class PerfilActivity : AppCompatActivity() {
 
 
 }
+
+
+
+
+/*Evento actualizar  sin foto
+btnActualizarP.setOnClickListener {
+    doAsync {
+        val call = updateRetrofit().create(APIService::class.java).updateUser(
+                ""+usrId,""+correo.text.toString(), ""+contrasenia.text.toString(),
+                ""+nombre.text.toString(), ""+apellidoP.text.toString(), ""+apellidoM.text.toString()).execute()
+        val respuesta = call.body() as ResponseUpdate
+        Log.i("TAG", "Response update "+ respuesta.mensaje)
+        /* response de actualizar
+        {
+            "valido": "1",
+            "mensaje": "Actualizado correctamente"
+        }
+        * */
+        uiThread{
+            if(respuesta.valido == "1"){
+                val alerDialog = AlertDialogBuilder(this@PerfilActivity)
+                alerDialog.title("Alerta")
+                alerDialog.message(""+respuesta.mensaje)
+                alerDialog.yesButton { "Si"
+                    nombre.setText("")
+                    correo.setText("")
+                    contrasenia.setText("")
+                    apellidoM.setText("")
+                    apellidoP.setText("")
+                }
+                alerDialog.show()
+
+            }else if(respuesta.valido == "0"){
+                val alerDialog = AlertDialogBuilder(this@PerfilActivity)
+                alerDialog.title("Alert")
+                alerDialog.message(""+respuesta.mensaje)
+                alerDialog.yesButton { "Si"
+                }
+                alerDialog.show()
+
+            }
+        }
+
+    }
+}*/

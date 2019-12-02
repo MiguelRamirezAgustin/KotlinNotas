@@ -40,8 +40,7 @@
             android:cursorVisible="true"
             android:maxLength="30"
             android:singleLine="true"
-            android:drawablePadding="6dp"
-            android:text="miguel@hola.com"/>
+            android:drawablePadding="6dp"/>
 
         <EditText
             android:id="@+id/eTContraseña"
@@ -55,8 +54,7 @@
             android:cursorVisible="true"
             android:maxLength="15"
             android:singleLine="true"
-            android:layout_marginTop="25dp"
-            android:text="123"/>
+            android:layout_marginTop="25dp"/>
 
         <Button
             android:id="@+id/btnIngresar"
