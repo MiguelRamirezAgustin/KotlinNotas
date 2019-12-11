@@ -42,7 +42,7 @@ class PerfilActivity : AppCompatActivity() {
 
     private val TAKE_PHOTO_REQUEST = 101
     private val PERMISSION_CODE = 1001
-    private  val GALLERY = 1
+    private val GALLERY = 1
     private val CAMERA = 2
     private val IMAGE_DIRECTORY = "/demosImg"
     private var imgP :String? = null
@@ -236,7 +236,6 @@ class PerfilActivity : AppCompatActivity() {
                     mediaPath = cursor.getString(columnIndex)
                     // Set the Image in ImageView for Previewing the Media
                     imgPerfil.setImageBitmap(BitmapFactory.decodeFile(mediaPath))
-                    cursor.close()
                     cursor.close()
                     //postPath contiene la ruta de la imagen
                     postPath = mediaPath
